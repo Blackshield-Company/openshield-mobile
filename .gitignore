@@ -1,0 +1,6 @@
+# Android build junk
+.gradle/
+**/build/
+*.apk
+*.aab
+.DS_Store
