@@ -35,18 +35,24 @@ npm run tauri android build
 ## Status
 
 - **M4 Pocket pairing — CODE DONE**: Android project, manual paste-payload
-  pairing, app-private token storage, first-run routes to Settings. LAN serve
-  correctly returns 401 without a bearer token.
+  pairing, app-private token storage, first-run routes to Settings. Serve
+  1.1.1 returns 401 without a bearer token on every host, including loopback.
 - **Next pass**: on-device install + screencap on the Android target, then
   v0.1 release packaging.
 
 ## Security model
 
-- Token auth only on LAN; wildcard binds refused unless explicitly enabled
-  (`lan_mode`).
-- Pairing via `/api/v1/pair` — QR scan or manual payload entry.
+- Token required on every request, including loopback; wildcard binds refused
+  unless explicitly enabled (`lan_mode`). Minimum server: openshield 1.1.1.
+- Pairing via `POST /api/v1/pair` — QR scan or manual payload entry. Payloads
+  are minted with the master token on the desktop; only the master token may
+  call pair (rate-limited to 5/min, returns 429).
+- The app always sends the bearer token. A 401 shows a re-pair banner
+  ("Unauthorized — re-pair with your OpenShield server") and routes to
+  Settings; 429 surfaces "Too many pairing attempts, wait a minute".
 - Tokens stored app-private, never in shared storage.
-- Same WS chat envelope as desktop — one code path, two platforms.
+- Same WS chat envelope as desktop — one code path, two platforms. WS uses
+  `?token=`.
 
 ---
 

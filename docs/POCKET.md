@@ -20,20 +20,28 @@ no offline provider chat.
 
 ## Pairing (M4)
 
-1. Desktop runs `openshield serve` (LAN mode, bearer token).
+1. Desktop runs `openshield serve` 1.1.1 or newer. Token required on every
+   request, including loopback.
 2. Pocket discovers or is pointed at the host:port.
 3. Pair via `POST /api/v1/pair` — QR scan or manual paste of the pairing
-   payload (host, port, token, expiry).
+   payload (host, port, token, expiry). Payloads are minted with the master
+   token on the desktop; only the master token may call pair.
 4. Token stored app-private (Tauri keyring/stronghold), never shared storage.
-5. Unpaired requests are rejected with 401 — pocket routes first-run to
-   Settings until a session exists.
+   The app always sends the bearer token; WS uses `?token=`.
+5. A 401 shows a re-pair banner ("Unauthorized — re-pair with your OpenShield
+   server") and routes to Settings until re-paired. A 429 surfaces "Too many
+   pairing attempts, wait a minute".
 
 ## Security model
 
+- Token required on every request, including loopback. Minimum server:
+  openshield 1.1.1.
 - Wildcard (`0.0.0.0`) binds refused unless `lan_mode = true` — explicit
   opt-in for mobile access.
 - Default: `bind 127.0.0.1`, port 9310, `lan_mode false`.
-- Pairing payloads expire; tokens are per-session, revocable via the desktop.
+- Pairing payloads expire and are minted with the master token on the
+  desktop. Tokens are per-session, revocable via the desktop. `POST
+  /api/v1/pair` is master-token only and rate-limited to 5/min (429).
 - Mobile approval gating mirrors desktop: WS `approval_req/res` with a 120s
   deny timeout; `/api/v1/approvals` REST for the inbox.
 
