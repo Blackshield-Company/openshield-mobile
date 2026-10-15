@@ -1,3 +1,5 @@
+![openshield-mobile](.github/preview.png)
+
 # OpenShield Pocket ⚫🛡
 
 The **mobile port** of [OpenShield Desktop](https://github.com/Blackshield-Company/openshield-desktop)
