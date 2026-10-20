@@ -7,12 +7,12 @@
 <p align="center">The Android remote for the OpenShield AI coding harness. Pair to openshield serve over LAN for chat, approvals and swarm. Part of the Blackshield Company.</p>
 
 <p align="center">
-  <a href="https://github.com/Blackshield-Company/openshield-mobile/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Blackshield-Company/openshield-mobile/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/synthalorian/openshield-mobile/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/synthalorian/openshield-mobile/actions/workflows/ci.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-9AA0A8?labelColor=17171D"></a>
-  <a href="https://github.com/Blackshield-Company/openshield"><img alt="Part of OpenShield" src="https://img.shields.io/badge/part%20of-OpenShield-C1121F?labelColor=17171D"></a>
+  <a href="https://github.com/synthalorian/openshield"><img alt="Part of OpenShield" src="https://img.shields.io/badge/part%20of-OpenShield-C1121F?labelColor=17171D"></a>
 </p>
 
-The **mobile port** of [OpenShield Desktop](https://github.com/Blackshield-Company/openshield-desktop)
+The **mobile port** of [OpenShield Desktop](https://github.com/synthalorian/openshield-desktop)
 — the Android companion for the OpenShield AI coding harness.
 
 `com.openshield.pocket` · Android · strictly a remote — Pocket pairs to a
@@ -26,7 +26,7 @@ desktop/server `openshield serve` instance over LAN. No offline provider chat.
 | `docs/POCKET.md` | Pocket design brief — pairing, security model, milestones. |
 
 The shared SvelteKit frontend and Rust core live in
-[openshield-desktop](https://github.com/Blackshield-Company/openshield-desktop)
+[openshield-desktop](https://github.com/synthalorian/openshield-desktop)
 — the same codebase serves desktop (Linux/macOS/Windows) and Pocket (Android),
 platform-gated per the design doc.
 
@@ -37,7 +37,7 @@ Pocket is built from the desktop repo (Tauri generates the Android target via
 source and the Pocket design.
 
 ```bash
-git clone https://github.com/Blackshield-Company/openshield-desktop.git
+git clone https://github.com/synthalorian/openshield-desktop.git
 cd openshield-desktop
 # Tauri Android prerequisites (per Tauri v2 docs), then:
 npm install
